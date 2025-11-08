@@ -12,6 +12,9 @@ temp/
 .angular/
 .angular/cache/
 
+# sqlite3 database
+financial-tracker.db
+
 # Environment files
 *.env
 .env.*
