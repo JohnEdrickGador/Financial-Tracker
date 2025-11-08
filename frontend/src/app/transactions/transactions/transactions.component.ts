@@ -8,7 +8,6 @@ import { NgFor, NgIf } from '@angular/common';
 @Component({
   selector: 'app-transactions',
   imports: [Select, FormsModule, ButtonModule, TableModule, NgFor, NgIf],
-  standalone: true,
   templateUrl: './transactions.component.html',
   styleUrl: './transactions.component.css',
 })
