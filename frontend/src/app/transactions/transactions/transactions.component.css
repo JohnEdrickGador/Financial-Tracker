@@ -1,0 +1,25 @@
+h1 {
+  text-align: center;
+}
+
+.transactions-bar {
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.filter-options {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+.transactions-table {
+  width: 90%;
+  margin: auto;
+}

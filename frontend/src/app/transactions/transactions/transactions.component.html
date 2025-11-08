@@ -1,0 +1,60 @@
+<h1>Transactions Page</h1>
+
+<div class="transactions-bar">
+    <div class="card flex justify-center">
+        <p-button [label]="showFilters ? 'Close Filters' : 'Open Filters' "
+            [icon]="showFilters? 'pi pi-times' : 'pi pi-filter'" (onClick)="toggleFilters()"
+            [severity]="showFilters ? 'secondary' : 'primary' " />
+    </div>
+
+    <div class="card flex justify-center">
+        <p-button label="Add Record" severity="info" icon="pi pi-plus" />
+    </div>
+</div>
+
+<div class="filter-options" *ngIf="showFilters === true">
+    <div class="card flex justify-center">
+        <p-select [options]="months" [showClear]="true" [(ngModel)]="selectedMonth" placeholder="Select Month"
+            class="w-full md:w-56" />
+    </div>
+
+    <div class="card flex justify-center">
+        <p-select [options]="years" [showClear]="true" [(ngModel)]="selectedYear" placeholder="Select Year"
+            class="w-full md:w-56" />
+    </div>
+
+    <div class="card flex justify-center">
+        <p-button label="Apply Filters" icon="pi pi-check" severity="primary" />
+    </div>
+</div>
+
+<div class=" card transactions-table">
+    <p-table [columns]="cols" [value]="Transactions" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template #footer>
+            <tr>
+                <td colspan="6">There are {{Transactions.length}} transactions.</td>
+            </tr>
+        </ng-template>
+        <ng-template #header let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{col}}
+                </th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    {{rowData[col]}}
+                </td>
+                <td>
+                    <div style="display: flex; gap: 1rem;">
+                        <p-button icon="pi pi-pencil" severity="success"></p-button>
+                        <p-button icon="pi pi-trash" severity="danger"></p-button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
