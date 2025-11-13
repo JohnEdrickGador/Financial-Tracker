@@ -1,0 +1,31 @@
+.transactions-modal-container {
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  /* border: 1px solid white; */
+}
+
+.input-field-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.input-field {
+  width: 100%;
+}
+
+.transactions-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}

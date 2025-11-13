@@ -1,1 +1,52 @@
-<p>transactions-form-modal works!</p>
+<p-dialog header="Create a Transaction" [modal]="true" [(visible)]="visible" [style]="{width: '40rem', height: 'auto'}"
+    (onHide)="closeModal()">
+
+    <span class="p-text-seconday block mb-3">Enter transaction details</span>
+    <div class="transactions-modal-container">
+        <div class="input-field-container">
+            <p-floatlabel variant="on" class="input-field">
+                <p-select [(ngModel)]=" transactionType" inputId="transactionType" [options]="transactionTypes"
+                    class="input-field" [checkmark]="true" [showClear]="true" />
+                <label for="transactionType">Transaction Type</label>
+            </p-floatlabel>
+            <p-floatlabel variant="on" class="input-field">
+                <p-select [(ngModel)]="accountType" inputId="accountType" [options]="accountTypes" class="input-field"
+                    [checkmark]="true" [showClear]="true" />
+                <label for=" accountType">Account Type</label>
+            </p-floatlabel>
+            <p-floatlabel variant="on" class="input-field">
+                <p-select [(ngModel)]="bank" inputId="bank" [options]="banks" class="input-field" [checkmark]="true"
+                    [showClear]="true" />
+                <label for="bank">Bank</label>
+            </p-floatlabel>
+        </div>
+
+
+        <div class="input-field-container column">
+            <p-floatlabel variant="on">
+                <input type="text" pInputText [(ngModel)]="description" inputId="description" class="input-field" />
+                <label for=" description">Description</label>
+            </p-floatlabel>
+        </div>
+
+        <div class="input-field-container">
+            <p-floatlabel variant="on" class="input-field">
+                <p-datepicker [(ngModel)]=" transactionDate" inputId="transactionDate" [style]="{width: '100%'}"
+                    appendTo="body" />
+                <label for=" transactionDate">Transaction Date</label>
+            </p-floatlabel>
+
+            <p-floatlabel variant="on" class="input-field">
+                <p-inputnumber [(ngModel)]="amount" mode="currency" currency="PHP" inputId="amount"
+                    class="input-field" />
+                <label for="amount">Transaction Amount</label>
+            </p-floatlabel>
+        </div>
+    </div>
+
+
+    <div class="transactions-modal-actions">
+        <p-button label="Cancel" severity="secondary" (click)="closeModal()"></p-button>
+        <p-button label="Save" (click)="closeModal()"></p-button>
+    </div>
+</p-dialog>

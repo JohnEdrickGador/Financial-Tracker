@@ -4,10 +4,19 @@ import { ButtonModule } from 'primeng/button';
 import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { NgFor, NgIf } from '@angular/common';
+import { TransactionsFormModalComponent } from '../transactions-form-modal/transactions-form-modal.component';
 
 @Component({
   selector: 'app-transactions',
-  imports: [Select, FormsModule, ButtonModule, TableModule, NgFor, NgIf],
+  imports: [
+    Select,
+    FormsModule,
+    ButtonModule,
+    TableModule,
+    NgFor,
+    NgIf,
+    TransactionsFormModalComponent,
+  ],
   templateUrl: './transactions.component.html',
   styleUrl: './transactions.component.css',
 })
@@ -37,9 +46,19 @@ export class TransactionsComponent {
   ];
   years = [2024, 2025];
   cols = ['Type', 'Amount', 'Description', 'Account', 'Transaction Date'];
-  showFilters = false;
+  showFilters: boolean = false;
+  showTransactionsModal: boolean = false;
 
   toggleFilters() {
     this.showFilters = !this.showFilters;
+  }
+
+  openTransactionsModal() {
+    this.showTransactionsModal = true;
+    console.log(`Modal Open: ${this.showTransactionsModal}`);
+  }
+
+  closeTransactionsModal() {
+    this.showTransactionsModal = false;
   }
 }

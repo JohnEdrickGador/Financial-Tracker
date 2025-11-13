@@ -8,13 +8,15 @@
     </div>
 
     <div class="card flex justify-center">
-        <p-button label="Add Record" severity="info" icon="pi pi-plus" />
+        <p-button label="Add Record" severity="info" icon="pi pi-plus" (onClick)="openTransactionsModal()" />
     </div>
 
-    <div class="card flex justify-center">
+    <div class=" card flex justify-center">
         <p-button label="Add Bank" severity="info" icon="pi pi-plus" />
     </div>
 </div>
+
+<transactions-form-modal [(visible)]="showTransactionsModal"></transactions-form-modal>
 
 <div class="filter-options" *ngIf="showFilters === true">
     <div class="card flex justify-center">
