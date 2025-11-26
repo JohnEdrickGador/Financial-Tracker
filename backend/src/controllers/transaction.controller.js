@@ -61,7 +61,22 @@ exports.createTransaction = (req, res) => {
 
 // READ transactions
 exports.readTransactions = (req, res) => {
-  const getTransactions = `SELECT * FROM transactions ORDER BY transaction_date DESC`;
+  // const getTransactions = `SELECT * FROM transactions ORDER BY transaction_date DESC`;
+  const getTransactions = `
+  SELECT
+  t.id,
+  t.amount,
+  t.description,
+  t.bank_id,
+  b.name AS bank_name,
+  b.abbreviation AS bank_abbreviation,
+  t.account_type,
+  t.transaction_type,
+  t.transaction_date
+  FROM transactions t
+  JOIN banks b ON t.bank_id = b.bank_id
+  ORDER BY transaction_date DESC
+  `;
   db.all(getTransactions, (err, rows) => {
     if (err) return res.status(500).json({ message: err.message });
 
