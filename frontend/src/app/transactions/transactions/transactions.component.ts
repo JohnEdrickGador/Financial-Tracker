@@ -70,7 +70,9 @@ export class TransactionsComponent implements OnInit {
     this.transactionService.deleteTransaction(transaction.id).subscribe({
       next: () => {
         console.log(`Deleted transaction with ID: ${transaction.id}`);
-        this.loadTransactions();
+        this.transactions = this.transactions.filter(
+          (t) => t.id !== transaction.id
+        );
       },
       error: (err) => {
         console.log(`Failed to delete transaction:  ${err}`);
