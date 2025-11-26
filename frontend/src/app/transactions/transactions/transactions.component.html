@@ -35,16 +35,16 @@
 </div>
 
 <div class=" card transactions-table">
-    <p-table [columns]="cols" [value]="Transactions" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [columns]="cols" [value]="transactions" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template #footer>
             <tr>
-                <td colspan="6">There are {{Transactions.length}} transactions.</td>
+                <td colspan="7">There are {{transactions.length}} transactions.</td>
             </tr>
         </ng-template>
         <ng-template #header let-columns>
             <tr>
                 <th *ngFor="let col of columns">
-                    {{col}}
+                    {{col.header}}
                 </th>
                 <th>Actions</th>
             </tr>
@@ -52,12 +52,13 @@
         <ng-template #body let-rowData let-columns="columns">
             <tr>
                 <td *ngFor="let col of columns">
-                    {{rowData[col]}}
+                    {{rowData[col.field]}}
                 </td>
                 <td>
                     <div style="display: flex; gap: 1rem;">
                         <p-button icon="pi pi-pencil" severity="success"></p-button>
-                        <p-button icon="pi pi-trash" severity="danger"></p-button>
+                        <p-button icon="pi pi-trash" severity="danger"
+                            (onClick)="deleteTransaction(rowData)"></p-button>
                     </div>
                 </td>
             </tr>
