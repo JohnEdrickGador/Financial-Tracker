@@ -51,9 +51,23 @@ exports.createTransaction = (req, res) => {
       ],
       function (err) {
         if (err) return res.status(500).json({ message: err.message });
-        res
-          .status(201)
-          .json({ id: this.lastID, message: "Transaction created." });
+        const getInsertedRowQuery = `
+        SELECT t.id, t.amount, t.description, t.account_type, t.transaction_type, t.transaction_date, b.abbreviation AS bank_abbreviation
+        FROM transactions t
+        JOIN banks b ON t.bank_id = b.bank_id
+        WHERE t.id = ?
+        `;
+        db.get(getInsertedRowQuery, [this.lastID], (err, transactionRow) => {
+          if (err) {
+            return res.status(500).json({ message: err.message });
+          }
+          return res
+            .status(201)
+            .json({
+              message: "Transaction created.",
+              transaction: transactionRow,
+            });
+        });
       }
     );
   });
