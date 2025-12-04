@@ -34,8 +34,8 @@
     </div>
 </div>
 
-<div class=" card transactions-table">
-    <p-table [columns]="cols" [value]="transactions" [tableStyle]="{ 'min-width': '50rem' }">
+<!-- <div class=" card transactions-table">
+    <p-table [columns]="cols" [value]="transactions" [tableStyle]="{ 'min-width': '50rem' }" dataKey="id">
         <ng-template #footer>
             <tr>
                 <td colspan="7">There are {{transactions.length}} transactions.</td>
@@ -49,7 +49,7 @@
                 <th>Actions</th>
             </tr>
         </ng-template>
-        <ng-template #body let-rowData let-columns="columns">
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
             <tr>
                 <td *ngFor="let col of columns">
                     {{rowData[col.field]}}
@@ -64,4 +64,42 @@
             </tr>
         </ng-template>
     </p-table>
+</div> -->
+
+<div class="card transactions-table">
+    <table style="min-width: 50rem; width: 100%; border-collapse: collapse;">
+        <!-- HEADER -->
+        <thead>
+            <tr>
+                <th *ngFor="let col of cols" style="border: 1px solid #ccc; padding: 0.5rem;">
+                    {{ col.header }}
+                </th>
+                <th style="border: 1px solid #ccc; padding: 0.5rem;">Actions</th>
+            </tr>
+        </thead>
+
+        <!-- BODY -->
+        <tbody>
+            <tr *ngFor="let row of transactions">
+                <td *ngFor="let col of cols" style="border: 1px solid #ccc; padding: 0.5rem;">
+                    {{ row[col.field] }}
+                </td>
+                <td style="border: 1px solid #ccc; padding: 0.5rem;">
+                    <div style="display: flex; gap: 1rem;">
+                        <button>Edit</button>
+                        <button (click)="deleteTransaction(row)">Delete</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+
+        <!-- FOOTER -->
+        <tfoot>
+            <tr>
+                <td [attr.colspan]="cols.length + 1" style="border: 1px solid #ccc; padding: 0.5rem;">
+                    There are {{ transactions.length }} transactions.
+                </td>
+            </tr>
+        </tfoot>
+    </table>
 </div>

@@ -5,11 +5,11 @@ import { Select } from 'primeng/select';
 import { TableModule } from 'primeng/table';
 import { NgFor, NgIf } from '@angular/common';
 import { TransactionsFormModalComponent } from '../transactions-form-modal/transactions-form-modal.component';
-import { Transaction } from '../../models/transaction';
+import { tableTransaction, Transaction } from '../../models/transaction';
 import { TransactionService } from '../../services/transaction.service';
 
 interface Column {
-  field: string;
+  field: keyof Transaction;
   header: string;
 }
 
@@ -33,16 +33,11 @@ export class TransactionsComponent implements OnInit {
   selectedYear = undefined;
   transactions: Transaction[] = [];
   cols: Column[] = [];
-  // cols = [
-  //   'Transaction Type',
-  //   'Amount',
-  //   'Description',
-  //   'Bank',
-  //   'Account',
-  //   'Transaction Date',
-  // ];
 
   ngOnInit(): void {
+    this.transactionService.transactions$.subscribe((list) => {
+      this.transactions = [...list];
+    });
     this.loadTransactions();
     this.cols = [
       { field: 'transaction_type', header: 'Type' },
@@ -57,7 +52,7 @@ export class TransactionsComponent implements OnInit {
   loadTransactions(): void {
     this.transactionService.getTransactions().subscribe({
       next: (data) => {
-        this.transactions = data.result;
+        this.transactionService.setInitialTransactions(data.result);
         console.log('Loaded data:', this.transactions);
       },
       error: (err) => {
